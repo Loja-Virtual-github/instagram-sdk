@@ -11,7 +11,7 @@ class Instagram
     const LONG_LIVED_TOKEN_URI = 'https://graph.instagram.com/access_token';
     const REFRESH_TOKEN_URI = 'https://graph.instagram.com/refresh_access_token';
     const USER_URI = 'https://graph.instagram.com/{user-id}';
-    const USER_MEDIA_URI = 'https://graph.instagram.com/{user-id}/media';
+    const USER_MEDIA_URI = 'https://graph.instagram.com/v11.0/{user-id}/media?fields={fields}&access_token={access-token}';
     
     /**
      * APP ID
@@ -364,15 +364,13 @@ class Instagram
      * @param string $userID
      * @return array
      */
-    public function getUserMedia($userID)
+    public function getUserMedia()
     {
         $uri = self::parseURL(self::USER_MEDIA_URI, array(
-            '{user-id}' => $this->getUserID()
+            '{user-id}' => $this->getUserID(),
+            '{fields}' => $this->getMediaFields(),
+            '{access-token}' => $this->getAccessToken()
         ));
-
-        $queryString = array(
-            'fields' => implode(',', $fields)
-        );
         
         $request = new Http\Get($uri);
         $request->send();
