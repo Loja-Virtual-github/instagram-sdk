@@ -125,7 +125,7 @@ class Instagram
      */
     public function getClientSecret()
     {
-        return $this->getClientSecret;
+        return $this->clientSecret;
     }
 
     /**
@@ -273,7 +273,7 @@ class Instagram
         if (empty($code)) {
             return false;
         }
-
+        
         $request = new Http\Post(self::TOKEN_URI, array(
             'client_id' => $this->getClientID(),
             'client_secret' => $this->getClientSecret(),
