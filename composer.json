@@ -1,0 +1,23 @@
+{
+    "name": "pablosanches/instagram-sdk",
+    "description": "PHP SDK for Instagram API",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "pablosanches/owl": "1.0.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "5.7.*"
+    },
+    "authors": [
+        {
+            "name": "Pablo Sanches",
+            "email": "sanches.webmaster@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Pablosanches\\InstagramSDK\\": "src/"
+        }
+    }
+}
