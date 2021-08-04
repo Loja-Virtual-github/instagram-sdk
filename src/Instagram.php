@@ -308,7 +308,13 @@ class Instagram
 
         $response = $request->getResponse();
 
-        return json_decode($response, true);
+        $response = json_decode($response, true);
+
+        if ($request->getStatus() == 200) {
+            $response['expires_in'] = self::timestampToDate($response['expires_in']);
+        }
+
+        return $response;
     }
 
     /**
@@ -386,5 +392,14 @@ class Instagram
     private static function parseURL($url, array $params = array())
     {
         return strtr($url, $params);
+    }
+
+    private static function timestampToDate(&$timestamp)
+    {
+        $expires = time() + $timestamp;
+        $expiraEm = new \DateTime();
+        $expiraEm->setTimestamp($expires);
+
+        return $expiraEm->format('Y-m-d H:i:s');
     }
 }
