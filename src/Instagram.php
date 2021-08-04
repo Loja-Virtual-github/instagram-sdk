@@ -274,7 +274,7 @@ class Instagram
             return false;
         }
 
-        $request = new Http\POST(self::TOKEN_URI, array(
+        $request = new Http\Post(self::TOKEN_URI, array(
             'client_id' => $this->getClientID(),
             'client_secret' => $this->getClientSecret(),
             'grant_type' => 'authorization_code',
@@ -302,7 +302,7 @@ class Instagram
         );
 
         $uri = self::LONG_LIVED_TOKEN_URI . '?' . http_build_query($queryString);
-        $request = new Http\GET($uri);
+        $request = new Http\Get($uri);
         $request->send();
 
         $response = $request->getResponse();
