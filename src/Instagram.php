@@ -334,8 +334,13 @@ class Instagram
         $request->send();
 
         $response = $request->getResponse();
+        $response = json_decode($response, true);
+        
+        if ($request->getStatus() == 200) {
+            $response['expires_in'] = self::timestampToDate($response['expires_in']);
+        }
 
-        return json_decode($response, true);
+        return $response;
     }
 
     /**
