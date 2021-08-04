@@ -273,14 +273,15 @@ class Instagram
         if (empty($code)) {
             return false;
         }
-        
-        $request = new Http\Post(self::TOKEN_URI, array(
+        $param = array(
             'client_id' => $this->getClientID(),
             'client_secret' => $this->getClientSecret(),
             'grant_type' => 'authorization_code',
             'code' => $code,
             'redirect_uri' => $this->getRedirectURI()
-        ));
+        );
+
+        $request = new Http\Post(self::TOKEN_URI, array('data' => $param));
 
         $request->send();
         $response = $request->getResponse();
@@ -323,7 +324,7 @@ class Instagram
         );
 
         $uri = self::REFRESH_TOKEN_URI . '?' . http_build_query($queryString);
-        $request = new Http\GET($uri);
+        $request = new Http\Get($uri);
         $request->send();
 
         $response = $request->getResponse();
@@ -343,7 +344,7 @@ class Instagram
             '{user-id}' => $this->getUserID()
         ));
 
-        $request = new Http\GET($uri);
+        $request = new Http\Get($uri);
         $request->send();
 
         $response = $request->getResponse();
@@ -367,7 +368,7 @@ class Instagram
             'fields' => implode(',', $fields)
         );
         
-        $request = new Http\GET($uri);
+        $request = new Http\Get($uri);
         $request->send();
 
         $response = $request->getResponse();
