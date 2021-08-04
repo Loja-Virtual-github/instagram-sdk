@@ -4,6 +4,7 @@
     "type": "library",
     "license": "MIT",
     "minimum-stability": "stable",
+    "prefer-stable": false,
     "require": {
         "pablosanches/owl": "1.0.*"
     },
