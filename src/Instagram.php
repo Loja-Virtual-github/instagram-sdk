@@ -10,7 +10,7 @@ class Instagram
     const TOKEN_URI = 'https://api.instagram.com/oauth/access_token';
     const LONG_LIVED_TOKEN_URI = 'https://graph.instagram.com/access_token';
     const REFRESH_TOKEN_URI = 'https://graph.instagram.com/refresh_access_token';
-    const USER_URI = 'https://graph.instagram.com/{user-id}';
+    const USER_URI = 'https://graph.instagram.com/me?fields=id,username&access_token={access-token}';
     const USER_MEDIA_URI = 'https://graph.instagram.com/v11.0/{user-id}/media?fields={fields}&access_token={access-token}';
     
     /**
@@ -352,7 +352,7 @@ class Instagram
     public function getUser($userID)
     {
         $uri = self::parseURL(self::USER_URI, array(
-            '{user-id}' => $this->getUserID()
+            '{access-token}' => $this->getAccessToken()
         ));
 
         $request = new Http\Get($uri);
